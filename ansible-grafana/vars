@@ -1,0 +1,5 @@
+---
+GRAFANA_USER: grafana
+GRAFANA_GROUP: grafana
+SYSTEM_USER: centos
+SYSTEM_GROUP: centos

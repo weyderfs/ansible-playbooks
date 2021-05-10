@@ -1,0 +1,24 @@
+---
+
+- name: install grafana
+  yum: 
+    name: https://dl.grafana.com/oss/release/grafana-6.3.5-1.x86_64.rpm
+  notify:
+    - restart grafana
+
+- name: Disable SElinux
+  selinux:
+    state: disabled
+
+- name: Permit Run
+  shell: |
+    setcap 'cap_net_bind_service=+ep' /usr/sbin/grafana-server
+    iptables -t nat -A PREROUTING -p tcp --dport 80 -j REDIRECT --to-port 3000
+  become: yes
+  notify:
+    - restart grafana
+
+- name: enable grafana on boot
+  systemd:
+    name: grafana-server
+    enabled: yes

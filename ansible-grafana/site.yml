@@ -1,0 +1,11 @@
+---
+  - name: Grafana
+    hosts: all
+    become: yes
+    remote_user: centos
+    gather_facts: True
+    roles:
+      - ../roles/install_base_requirements
+      - ../roles/users_ops
+      - ../roles/install_grafana
+      - ../roles/install_grafana_stack_plugins

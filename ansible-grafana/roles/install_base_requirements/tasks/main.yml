@@ -1,0 +1,46 @@
+---
+# tasks file for install_base_requirements
+- name: Install Updates
+  yum: 
+    name: "*"
+    state: latest
+  become: yes
+
+- name: EPEL Releases & DeltaRPM
+  yum: 
+    name: "{{ itens }}"
+  vars:
+    itens:
+    - epel-release
+    - deltarpm
+  become: yes
+  
+- name: UNZIP Package installation
+  yum:
+    name: unzip
+    state: latest
+  become: yes
+
+- name: Git installation
+  yum:
+    name: git
+    state: latest
+  become: yes
+
+- name: JQ Package installation
+  yum:
+    name: jq
+    state: latest
+  become: yes
+
+- name: Install WGET
+  yum:
+    name: wget
+    state: latest
+  become: yes
+
+- name: Install VIM
+  yum:
+    name: vim
+    state: latest
+  become: yes
