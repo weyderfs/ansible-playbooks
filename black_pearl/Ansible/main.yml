@@ -1,0 +1,11 @@
+---
+  - name: From zero to K8s 
+    hosts: all
+    remote_user: darth
+    become: yes
+    gather_facts: True
+    roles:
+      - roles/install_base_system
+      - install_docker
+      - install_k8s
+#     - install_helm - No uncomment when run installation playbook

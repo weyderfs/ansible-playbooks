@@ -1,0 +1,27 @@
+---
+# tasks file for install_base_system
+- name: Upgrade System OS
+  apt: 
+    update_cache: yes
+
+- name: Install requirements
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - python
+    - bash-completion
+    - locate
+    - vim
+    - htop
+    - ssh
+    - curl
+    - wget
+    - netcat
+    - telnet
+    - gpg
+    - mtr
+    - apt-transport-https
+    - ca-certificates
+    - gnupg-agent
+    - software-properties-common

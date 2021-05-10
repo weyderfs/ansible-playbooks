@@ -1,0 +1,11 @@
+---
+# handlers file for install_docker
+- name: Start Docker
+  systemd:
+    state: started
+    name: docker
+
+- name: Restart Docker
+  systemd:
+    state: restarted
+    name: docker

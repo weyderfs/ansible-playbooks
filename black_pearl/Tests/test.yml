@@ -1,0 +1,12 @@
+---
+  - name: From zero to K8s 
+    hosts: all
+    connection: local
+    remote_user: travis
+    become: true
+    gather_facts: True
+    roles:
+      - ../Ansible/roles/install_base_system
+#      - ../Ansible/roles/install_docker
+      - ../Ansible/roles/install_k8s
+#      - install_helm - Not uncomment when run installation playbook

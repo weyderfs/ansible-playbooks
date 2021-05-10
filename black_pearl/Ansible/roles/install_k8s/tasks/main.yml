@@ -1,0 +1,27 @@
+---
+# tasks file for install_k8s
+- name: Add repository K8s
+  shell: |
+    curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | apt-key add -
+    echo "deb http://apt.kubernetes.io/ kubernetes-xenial main" > /etc/apt/sources.list.d/k8s.list
+
+- name: Update repos
+  apt:
+    update_cache: yes
+
+- name: Install K8s - Pretty Kubernetes
+  apt:
+    name: "{{ packages }}"
+  vars:
+    packages:
+    - kubeadm
+    - kubelet
+    - kubectl
+
+- name: Turn off SWAP
+  shell: |
+    swapoff -a
+
+- name: Download K8s Images
+  shell: |
+    kubeadm config images pull

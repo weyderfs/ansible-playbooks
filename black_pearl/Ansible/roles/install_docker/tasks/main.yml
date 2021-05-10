@@ -1,0 +1,32 @@
+---
+# tasks file for install_docker
+- name: Docker Installation
+  apt:
+    name: docker.io
+  become: yes
+  notify: Start Docker
+
+- name: Ensure that docker was installed
+  shell: |
+    docker info
+
+- name: Making Docker use cgroups Linux
+  copy:
+    src: ../files/daemon.json
+    dest: /etc/docker/daemon.json
+    owner: root
+    group: root
+
+- name: Creating Directory Structure
+  shell: |
+    mkdir -p /etc/systemd/system/docker.service.d
+  become: yes
+  notify: Restart Docker
+
+- name: Systemctl Enable Docker
+  shell: |
+    systemctl enable docker.service
+
+- name: Ensure Docker user cgroups
+  shell: |
+    docker info | grep -i cgroup
